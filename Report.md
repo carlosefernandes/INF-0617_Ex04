@@ -23,24 +23,7 @@ Shuffeling willdirect same words to the same reducer so we can count their overa
 ### Part-II Calculating the complexity factor of each author
 In this part we have two tasks. The first is to determine the words list associated with each author. The second is to calculate the portion of words that not appear in the list from part-I and divide them by the author words list size.
 
-To do so, we use a Mapreduce strategy that maps `Map(Key,Value)` all words to {Author, Word} tuples. The idea is to ignor the book names so every word within a book is associated with a specific author.
+To do so, we use a Mapreduce strategy that maps `Map(Key,Value)` all words to {Author, Word} tuples. The idea is to ignor the book names so every word within a book is associated with a specific author. Moreover, we load the index file with the 3000 most common words and for each tuple we verify if its value (Word) is an exotic or normal word. Therefore, our map is actually transmitting 2 valeus per key: `Map(Key, v1, v2)` where our key is the author name, v1 is the actual word and v2 is 0 for a normal word and 1 for an exotic word. The reason we chose 0 and 1 is related with the reducer part.
 
-On the reducer side we create a dictionary for each author. For each tuple that arrives we add the word to its author dictionary if not already exist. By the end of this process we have 
-
-
-Our reducer strategy is to combine all keys (party number) by summing their values (number of votes). Shuffeling would try to direct the same key to the same reducer worker. However, even if two workers were summing the same key, they can later be reduced by this same strategy.
-
-### Results:
-Here we show the finnel results of our program. Remembering that the 95 party code was converted to blank vote and 96 as Null vote. There were no 97 ("Voto Anulado e Apurado em Separado") party codes in the database:
-
-	13 - 3888584	
-	15 - 4594708	
-	21 - 12958	
-	28 - 22822	
-	29 - 11118	
-	31 - 132042	
-	43 - 260696	
-	45 - 12230807	
-	50 - 187487	
-	Voto Branco - 2020613	
-	Voto Nulo - 2374946	
+The shuffel here sends same author triples to the same reducer. If the word doesn't exist in the suthor dictionary, we will insert it and sum both the dictionary size and the complexity coeficient (summing 1 for exotic word and 0 for a regular one). In the end we order this list, created by the reducer and transmit it. 
+###Results
