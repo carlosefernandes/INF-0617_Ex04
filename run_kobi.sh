@@ -1,19 +1,25 @@
 #!/bin/bash
+#CONFIGURATION PATHS
 WORK_FOLDER=/tmp/data/INF-0617_Ex04/KOBI
-OUT_FOLDER=/tmp/data/INF-0617_Ex04/output
 INPUT_FOLDER=/tmp/data/books/txt_tst
 INPUT_INDEX=/tmp/data/books/master_list.csv
 
+#INITIALIZATION
+OUT_FOLDER=/tmp/data/INF-0617_Ex04/output
 rm -rf $OUT_FOLDER
 
+#PART-I
 $HADOOP_HOME/bin/hadoop  jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.0.0.jar \
 -input $INPUT_FOLDER/ \
 -output $OUT_FOLDER/out1 \
 -mapper "python $WORK_FOLDER/map.py" \
 -reducer "python $WORK_FOLDER/reducer.py"
 
+#Case there is more than one reducer - 
+# we should treat the 3000 file selection here
 cat $OUT_FOLDER/out1/* >$OUT_FOLDER/index.txt 
 
+#PART-II
 $HADOOP_HOME/bin/hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.0.0.jar \
 -input $INPUT_FOLDER/ \
 -output $OUT_FOLDER/out2 \
