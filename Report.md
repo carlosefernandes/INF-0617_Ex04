@@ -1,7 +1,7 @@
-# INF-0617: Ex03, Hadoop Streaming
+# INF-0617: Ex04, Vocaulary Complexity
 ## Students: Carlos Eduardo Fernandes and Yakov Nae 
 
-In this exercise we implement the electoral forecasting for the second round of elections in São Paulo state in 2014 using Hadoop Streaming. The database for this exercise can be downloaded [here](http://agencia.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2014_SP.zip).
+In this exercise we will be working with the Gutenberg library that contains 595 files, hostinga total space of 427MB. Our goal is to determine who is the most complex author. In other words, we the portion of exotic words evry author is using and select the one with the highest relation between exotic and regular words.
 
 ### Running instructions:
 This zip file contains a run.sh file with the following two fields:

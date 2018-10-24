@@ -3,8 +3,10 @@ import re
 import csv
 import os
 
-#f = open('/tmp/data/master_list.csv')
-f = open(sys.argv[1])
+FILE_MASTER_LIST = sys.argv[1] 	#master_list.csv
+FILE_COM_WORDS   = sys.argv[2] 	#3000 most common words
+
+f = open(FILE_MASTER_LIST, "r")
 reader = csv.reader(f)
 
 book_authors = {}
@@ -20,7 +22,7 @@ for row in reader :
 	book_authors[row[4]] = row[3].lower()
 
 
-with open(sys.argv[2], "r") as f:
+with open(FILE_COM_WORDS, "r") as f:
 	for line in f:
 		line = line.replace("\n","").replace(" ","").replace("\t","")
 		words.add(line)
