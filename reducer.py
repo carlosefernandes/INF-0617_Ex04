@@ -15,13 +15,9 @@ sorted_counts = sorted(counts.items(),key = operator.itemgetter(1),reverse = Tru
 
 lines_counter = 0
 
-index_file = open("index.txt","w") 
-
 for line in sorted_counts :
     if (lines_counter < 3000):
-        index_file.write(line[0] + "\n")
+        print(line[0])
         lines_counter = lines_counter + 1
     else:
         break;
-
-index_file.close()

@@ -1,6 +1,6 @@
 #!/bin/bash
 #CONFIGURATION PATHS
-WORK_FOLDER=/tmp/data/INF-0617_Ex04/KOBI
+WORK_FOLDER=/tmp/data/INF-0617_Ex04
 INPUT_FOLDER=/tmp/data/books/txt_tst
 INPUT_INDEX=/tmp/data/books/master_list.csv
 
